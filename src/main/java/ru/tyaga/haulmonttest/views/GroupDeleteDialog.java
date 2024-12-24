@@ -51,7 +51,6 @@ public class GroupDeleteDialog extends Dialog {
                         this.close();
                     }
 
-
                 });
                 Button cancelButton = new Button("Отмена", event -> dialog.close());
                 dialog.add(deleteButton, cancelButton);

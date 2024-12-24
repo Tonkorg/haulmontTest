@@ -38,9 +38,9 @@ public class GroupEditorDialog extends Dialog {
 
         groupComboBox.addValueChangeListener(event ->
         {
-            if(event.getValue().getFaculty() != null) {
+            if (event.getValue().getFaculty() != null) {
                 saveButton.setText("Редактировать");
-            }else saveButton.setText("Создать");
+            } else saveButton.setText("Создать");
 
         });
 
@@ -57,11 +57,16 @@ public class GroupEditorDialog extends Dialog {
                 close();
             } else {
                 Group newGroup = new Group();
-                newGroup.setNumber(newGroupNameField.getValue().trim());
-                newGroup.setFaculty(newGroupFacultyField.getValue().trim());
-                groupService.addGroup(newGroup);
-                onSave.run();
-                close();
+                if (newGroupNameField.getValue().trim().isEmpty() || newGroupFacultyField.getValue().trim().isEmpty()) {
+
+                    Notification.show("Группа и факультет не могут быть пустыми");
+                } else {
+                    newGroup.setNumber(newGroupNameField.getValue().trim());
+                    newGroup.setFaculty(newGroupFacultyField.getValue().trim());
+                    groupService.addGroup(newGroup);
+                    onSave.run();
+                    close();
+                }
             }
         });
 
